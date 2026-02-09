@@ -1,0 +1,51 @@
+# Secrets
+.env
+
+# Python
+# Compiled source
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Distribution / Packaging
+.Python
+build/
+dist/
+wheels/
+share/python-wheels/
+*.whl
+*.egg
+
+# Testing
+.tox/
+.nox/
+
+# Editors
+.project
+.vscode/        # Visual Studio Code
+*.swp           # Vim
+
+# Miscellaneous
+# OS-generated files
+.DS_Store       # macOS
+.Thumbs.db      # Windows
+
+# Jupyter Notebook files
+.ipynb_checkpoints
+
+# Ruff cache
+.ruff_cache/
+
+# User credentials, local state, and settings
+.abstra/
+.streamlit/secrets.toml
+.pypirc
