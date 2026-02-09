@@ -1,4 +1,5 @@
 import csv
+from os import getenv
 from bs4 import BeautifulSoup
 from req import new_session
 from menu import scrape_subcategories
@@ -35,7 +36,7 @@ def crawl_categories(categories: list[dict]) -> list[dict]:
         if url is None:
             continue
         if i > 0:
-            delay(5,10)
+            delay(10, 20)
         products = scrape_subcategory(url)
         print(products, len(products))
         for product in products:
@@ -45,8 +46,7 @@ def crawl_categories(categories: list[dict]) -> list[dict]:
                 data = scrape_product_page(url)
                 product.update(data)
                 crawl_data.append(product) 
-                delay(2,3)
-            break
+                delay(2, 5)
         i+=1
 
     return crawl_data
@@ -55,15 +55,16 @@ def crawl_categories(categories: list[dict]) -> list[dict]:
 def main():
     #TODO:
     # hash products per page  with total products
-    # categories = ["https://www.decathlon.ma/4838-shorts-bebe", "https://www.decathlon.ma/4841-chaussures-bebe"]
     session = new_session()
-    res = session.get(f"https://www.decathlon.ma/", impersonate="chrome")
+    BASE_URL = getenv("BASE_URL")
+    if BASE_URL is None:
+        return
+    res = session.get(BASE_URL, impersonate="chrome")
     soup = BeautifulSoup(res.text, "html.parser")
     subcategories = scrape_subcategories(soup)
     products = crawl_categories(subcategories)
     cache_to_json_dict("data.json", products) 
     #products_sorted_by_id = sorted(products, key=lambda item: item['id'])
-    #write_csv("data.csv", products_sorted_by_id) 
 
 
 if __name__ == "__main__":

@@ -9,10 +9,10 @@ def delay(min: float, max:float):
 
 
 def scrape_subcategory(category_url: str, page: int = 1) -> list[dict]:
-    delay(2,3)
+    delay(2, 3)
     session = new_session()
     res = session.get(f"{category_url}?page={page}", impersonate="chrome")
-    print(f"{category_url}?page={page}")
+    #print(f"{category_url}?page={page}")
     soup = BeautifulSoup(res.text, "html.parser")
     div = soup.find("div", attrs={"data-testid": "products-list"})
     items = []

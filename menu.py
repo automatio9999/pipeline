@@ -6,8 +6,6 @@ def scrape_subcategories(soup: BeautifulSoup) -> list[dict]:
     subcategory_code = re.compile(r"(?<=/)\d+(?=-)")
     subcategory_list = []
 
-    if soup is None:
-        return subcategory_list
 
     sports_menu = soup.find(id="dmm-popover-1")
     if sports_menu is None:
@@ -29,8 +27,6 @@ def scrape_subcategories(soup: BeautifulSoup) -> list[dict]:
             if len(found_code) > 0:
                 code = int(found_code[0])
             subcategory_list.append(dict(subcategory_name=name, subcategory_url=url, subcategory_code=code))
-            break
-        break
     #menu_selector = "#header > section > nav > ul > li"
     #menus = soup.select(menu_selector)
     #for menu in menus[:]:
