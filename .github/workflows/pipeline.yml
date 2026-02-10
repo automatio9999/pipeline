@@ -3,7 +3,7 @@ name: Run Script
 on:
   workflow_dispatch:
   schedule:
-    - cron: "34 3 * * *"
+    - cron: "34 9 * * *"
 
 jobs:
   build:
@@ -25,8 +25,8 @@ jobs:
 
       - name: Execute Entrypoint
         env:
-          MY_USERNAME: ${{ secrets.MY_USERNAME }}
-          MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+
         run: python main.py
 
       - name: Commit and push changes
